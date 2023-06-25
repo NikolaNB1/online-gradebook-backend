@@ -19,12 +19,14 @@ class GradebookService
     public function postGradebook(Request $request)
     {
         $request->validate([
-            'name' => 'required|min:2|max:255|string',
+            'name' => 'required|unique:gradebooks,name|max:255|string',
+            'professor_id' => 'nullable|exists:users,id',
         ]);
 
         $gradebook = new Gradebook();
 
         $gradebook->name = $request->name;
+        $gradebook->professor_id = $request->professor_id;
         $gradebook->save();
 
         return $gradebook;

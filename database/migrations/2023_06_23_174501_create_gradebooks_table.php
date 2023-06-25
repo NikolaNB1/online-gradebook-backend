@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('gradebooks', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('professor_id')->references('id')->on('users');
+            $table->foreignId('professor_id')->nullable()->references('id')->on('users');
             $table->timestamps();
         });
     }
